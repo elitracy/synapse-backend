@@ -9,12 +9,15 @@
   "type": "module",
   "scripts": {
     "start": "node index.js",
-    "dev": "nodemon index.js"
+    "dev": "nodemon index.js",
+    "lint": "eslint src"
   },
   "dependencies": {
+    "aws-amplify": "^5.0.15",
     "express": "4"
   },
   "devDependencies": {
+    "eslint": "^8.34.0",
     "nodemon": "^2.0.20"
   }
 }
