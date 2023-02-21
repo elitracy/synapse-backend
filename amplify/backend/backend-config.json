@@ -1,5 +1,34 @@
 {
   "api": {
+    "backend-rest": {
+      "apiType": "REST",
+      "build": true,
+      "dependsOn": [
+        {
+          "attributes": [
+            "ClusterName",
+            "VpcId",
+            "VpcCidrBlock",
+            "SubnetIds",
+            "VpcLinkId",
+            "CloudMapNamespaceId"
+          ],
+          "category": "",
+          "resourceName": "NetworkStack"
+        }
+      ],
+      "deploymentMechanism": "FULLY_MANAGED",
+      "iamAccessUnavailable": true,
+      "imageSource": {
+        "template": "dockerfile-rest-express",
+        "type": "TEMPLATE"
+      },
+      "providerPlugin": "awscloudformation",
+      "resourceName": "backend-rest",
+      "restrictAccess": false,
+      "service": "ElasticContainer",
+      "skipHashing": false
+    },
     "synapsebackend": {
       "dependsOn": [],
       "output": {
