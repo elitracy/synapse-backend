@@ -1,11 +1,11 @@
 import express from "express"
 const app = express()
-const port = process.env.PORT || 3001;
+const port = process.env.PORT || 3000;
 
 import { Amplify } from 'aws-amplify';
 import { DataStore } from '@aws-amplify/datastore';
-import { User } from './models/index.js';
-import config from "../src/aws-exports.js";
+import { User } from '../../../../../src/models/index.js';
+import config from "../../../../../src/aws-exports.js";
 
 Amplify.configure({
   ...config,

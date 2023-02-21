@@ -8,8 +8,8 @@
   "private": false,
   "type": "module",
   "scripts": {
-    "start": "node index.js",
-    "dev": "nodemon index.js",
+    "start": "node ./amplify/backend/api/backendrest/src/index.js",
+    "dev": "nodemon ./amplify/backend/api/backendrest/src/index.js",
     "lint": "eslint src"
   },
   "dependencies": {
