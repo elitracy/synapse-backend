@@ -1,6 +1,6 @@
 {
   "api": {
-    "backend-rest": {
+    "backendrest": {
       "apiType": "REST",
       "build": true,
       "dependsOn": [
@@ -24,7 +24,7 @@
         "type": "TEMPLATE"
       },
       "providerPlugin": "awscloudformation",
-      "resourceName": "backend-rest",
+      "resourceName": "backendrest",
       "restrictAccess": false,
       "service": "ElasticContainer",
       "skipHashing": false

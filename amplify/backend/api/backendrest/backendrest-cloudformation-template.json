@@ -95,7 +95,7 @@
           },
           "RoutingPolicy": "MULTIVALUE"
         },
-        "Name": "backend-rest"
+        "Name": "backendrest"
       }
     },
     "TaskDefinitionTaskRoleFD40A61D": {
@@ -208,7 +208,7 @@
               {
                 "Ref": "rootStackName"
               },
-              "-backend-rest"
+              "-backendrest"
             ]
           ]
         },
@@ -319,7 +319,7 @@
               {
                 "Ref": "rootStackName"
               },
-              "-backend-rest-api"
+              "-backendrest-api"
             ]
           ]
         },
@@ -341,7 +341,7 @@
               {
                 "Ref": "rootStackName"
               },
-              "-api-backend-rest-api"
+              "-api-backendrest-api"
             ]
           ]
         }
@@ -399,7 +399,7 @@
             }
           }
         },
-        "ServiceName": "backend-rest-service-api-8080",
+        "ServiceName": "backendrest-service-api-8080",
         "ServiceRegistries": [
           {
             "ContainerName": "api",
@@ -707,7 +707,7 @@
             "CLUSTER_NAME": {
               "Ref": "NetworkStackClusterName"
             },
-            "SERVICE_NAME": "backend-rest-service-api-8080"
+            "SERVICE_NAME": "backendrest-service-api-8080"
           }
         },
         "Handler": "index.handler",
@@ -1015,7 +1015,7 @@
                   "ClusterName": {
                     "Ref": "NetworkStackClusterName"
                   },
-                  "ServiceName": "backend-rest-service-api-8080"
+                  "ServiceName": "backendrest-service-api-8080"
                 },
                 "InputArtifacts": [
                   {
@@ -1048,7 +1048,7 @@
               {
                 "Ref": "rootStackName"
               },
-              "-backend-rest-service-api-8080"
+              "-backendrest-service-api-8080"
             ]
           ]
         }
@@ -2243,7 +2243,7 @@
               {
                 "Ref": "rootStackName"
               },
-              "-backend-rest"
+              "-backendrest"
             ]
           ]
         },
@@ -2288,7 +2288,7 @@
           "Ref": "Api"
         },
         "AuthorizerType": "JWT",
-        "Name": "backend-restAuthorizer",
+        "Name": "backendrestAuthorizer",
         "IdentitySource": [
           "$request.header.Authorization"
         ],
@@ -2370,7 +2370,7 @@
   },
   "Outputs": {
     "ServiceName": {
-      "Value": "backend-rest-service-api-8080"
+      "Value": "backendrest-service-api-8080"
     },
     "ClusterName": {
       "Value": {
@@ -2385,7 +2385,7 @@
             {
               "Ref": "rootStackName"
             },
-            "-backend-rest-service-api-8080"
+            "-backendrest-service-api-8080"
           ]
         ]
       }
@@ -2394,7 +2394,7 @@
       "Value": "api"
     },
     "ApiName": {
-      "Value": "backend-rest"
+      "Value": "backendrest"
     },
     "RootUrl": {
       "Value": {
@@ -2498,5 +2498,6 @@
         "states": "states.us-west-2.amazonaws.com"
       }
     }
-  }
+  },
+  "Description": "{\"createdOn\":\"Mac\",\"createdBy\":\"Amplify\",\"createdWith\":\"10.7.3\",\"stackType\":\"api-ElasticContainer\",\"metadata\":{}}"
 }
