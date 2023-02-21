@@ -7,6 +7,7 @@ import { DataStore } from '@aws-amplify/datastore';
 import { User } from '../../../../../src/models/index.js';
 import config from "../../../../../src/aws-exports.js";
 
+
 Amplify.configure({
   ...config,
 });
