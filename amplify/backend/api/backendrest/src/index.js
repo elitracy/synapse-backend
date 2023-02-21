@@ -1,5 +1,5 @@
 import express from "express"
-const app = express()
+import bodyParser from "body-parser";
 const port = process.env.PORT || 3000;
 
 import { Amplify } from 'aws-amplify';
@@ -7,6 +7,16 @@ import { DataStore } from '@aws-amplify/datastore';
 import { User } from '../../../../../src/models/index.js';
 import config from "../../../../../src/aws-exports.js";
 
+const app = express();
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+
+// Enable CORS for all methods
+app.use((_, res, next) => {
+  res.header("Access-Control-Allow-Origin", "*")
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept")
+  next()
+});
 
 Amplify.configure({
   ...config,
