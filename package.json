@@ -1,0 +1,23 @@
+{
+  "name": "synapse-backend",
+  "version": "1.0.0",
+  "main": "src/index.js",
+  "repository": "https://github.com/CSCE-482-Thomas-2023Spring/synapse-backend.git",
+  "author": "Elias Tracy <elitracy19@gmail.com>",
+  "license": "MIT",
+  "private": false,
+  "type": "module",
+  "scripts": {
+    "start": "node ./amplify/backend/api/backendrest/src/index.js",
+    "dev": "nodemon ./amplify/backend/api/backendrest/src/index.js",
+    "lint": "eslint src"
+  },
+  "dependencies": {
+    "aws-amplify": "^5.0.15",
+    "express": "4"
+  },
+  "devDependencies": {
+    "eslint": "^8.34.0",
+    "nodemon": "^2.0.20"
+  }
+}
