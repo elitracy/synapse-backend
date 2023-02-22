@@ -1,17 +1,23 @@
 export type AmplifyDependentResourcesAttributes = {
   "api": {
-    "backendrest": {
-      "ApiName": "string",
-      "ClusterName": "string",
-      "ContainerNames": "string",
-      "PipelineName": "string",
-      "RootUrl": "string",
-      "ServiceName": "string"
-    },
     "synapsebackend": {
       "GraphQLAPIEndpointOutput": "string",
       "GraphQLAPIIdOutput": "string",
       "GraphQLAPIKeyOutput": "string"
+    },
+    "synapserest": {
+      "ApiId": "string",
+      "ApiName": "string",
+      "RootUrl": "string"
+    }
+  },
+  "function": {
+    "synapsebackendaf2b6869": {
+      "Arn": "string",
+      "LambdaExecutionRole": "string",
+      "LambdaExecutionRoleArn": "string",
+      "Name": "string",
+      "Region": "string"
     }
   }
 }

@@ -1,34 +1,5 @@
 {
   "api": {
-    "backendrest": {
-      "apiType": "REST",
-      "build": true,
-      "dependsOn": [
-        {
-          "attributes": [
-            "ClusterName",
-            "VpcId",
-            "VpcCidrBlock",
-            "SubnetIds",
-            "VpcLinkId",
-            "CloudMapNamespaceId"
-          ],
-          "category": "",
-          "resourceName": "NetworkStack"
-        }
-      ],
-      "deploymentMechanism": "FULLY_MANAGED",
-      "iamAccessUnavailable": true,
-      "imageSource": {
-        "template": "dockerfile-rest-express",
-        "type": "TEMPLATE"
-      },
-      "providerPlugin": "awscloudformation",
-      "resourceName": "backendrest",
-      "restrictAccess": false,
-      "service": "ElasticContainer",
-      "skipHashing": false
-    },
     "synapsebackend": {
       "dependsOn": [],
       "output": {
@@ -49,6 +20,46 @@
       },
       "providerPlugin": "awscloudformation",
       "service": "AppSync"
+    },
+    "synapserest": {
+      "dependsOn": [
+        {
+          "attributes": [
+            "Name",
+            "Arn"
+          ],
+          "category": "function",
+          "resourceName": "synapsebackendaf2b6869"
+        }
+      ],
+      "providerPlugin": "awscloudformation",
+      "service": "API Gateway"
+    }
+  },
+  "function": {
+    "synapsebackendaf2b6869": {
+      "build": true,
+      "dependsOn": [],
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    }
+  },
+  "parameters": {
+    "AMPLIFY_function_synapsebackendaf2b6869_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "synapsebackendaf2b6869"
+        }
+      ]
+    },
+    "AMPLIFY_function_synapsebackendaf2b6869_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "synapsebackendaf2b6869"
+        }
+      ]
     }
   }
 }
