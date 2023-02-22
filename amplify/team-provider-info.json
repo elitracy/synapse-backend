@@ -14,13 +14,12 @@
     },
     "categories": {
       "api": {
-        "synapsebackend": {},
-        "synapserest": {}
+        "synapsebackend": {}
       },
       "function": {
-        "synapsebackendaf2b6869": {
+        "rest": {
           "deploymentBucketName": "amplify-synapsebackend-staging-141134-deployment",
-          "s3Key": "amplify-builds/synapsebackendaf2b6869-75725a4b582b724f4372-build.zip"
+          "s3Key": "amplify-builds/rest-7376316f796664763138-build.zip"
         }
       }
     }

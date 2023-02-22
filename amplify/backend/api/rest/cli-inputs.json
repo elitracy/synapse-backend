@@ -1,9 +1,9 @@
 {
   "version": 1,
   "paths": {
-    "/items": {
-      "name": "/items",
-      "lambdaFunction": "synapsebackendaf2b6869",
+    "/v1": {
+      "name": "/v1",
+      "lambdaFunction": "rest",
       "permissions": {
         "setting": "open"
       }

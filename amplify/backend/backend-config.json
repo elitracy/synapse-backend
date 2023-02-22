@@ -1,5 +1,19 @@
 {
   "api": {
+    "rest": {
+      "dependsOn": [
+        {
+          "attributes": [
+            "Name",
+            "Arn"
+          ],
+          "category": "function",
+          "resourceName": "rest"
+        }
+      ],
+      "providerPlugin": "awscloudformation",
+      "service": "API Gateway"
+    },
     "synapsebackend": {
       "dependsOn": [],
       "output": {
@@ -20,44 +34,29 @@
       },
       "providerPlugin": "awscloudformation",
       "service": "AppSync"
-    },
-    "synapserest": {
-      "dependsOn": [
-        {
-          "attributes": [
-            "Name",
-            "Arn"
-          ],
-          "category": "function",
-          "resourceName": "synapsebackendaf2b6869"
-        }
-      ],
-      "providerPlugin": "awscloudformation",
-      "service": "API Gateway"
     }
   },
   "function": {
-    "synapsebackendaf2b6869": {
+    "rest": {
       "build": true,
-      "dependsOn": [],
       "providerPlugin": "awscloudformation",
       "service": "Lambda"
     }
   },
   "parameters": {
-    "AMPLIFY_function_synapsebackendaf2b6869_deploymentBucketName": {
+    "AMPLIFY_function_rest_deploymentBucketName": {
       "usedBy": [
         {
           "category": "function",
-          "resourceName": "synapsebackendaf2b6869"
+          "resourceName": "rest"
         }
       ]
     },
-    "AMPLIFY_function_synapsebackendaf2b6869_s3Key": {
+    "AMPLIFY_function_rest_s3Key": {
       "usedBy": [
         {
           "category": "function",
-          "resourceName": "synapsebackendaf2b6869"
+          "resourceName": "rest"
         }
       ]
     }
