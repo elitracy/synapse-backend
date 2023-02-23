@@ -1,19 +1,5 @@
 {
   "api": {
-    "rest": {
-      "dependsOn": [
-        {
-          "attributes": [
-            "Name",
-            "Arn"
-          ],
-          "category": "function",
-          "resourceName": "rest"
-        }
-      ],
-      "providerPlugin": "awscloudformation",
-      "service": "API Gateway"
-    },
     "synapsebackend": {
       "dependsOn": [],
       "output": {
@@ -36,29 +22,5 @@
       "service": "AppSync"
     }
   },
-  "function": {
-    "rest": {
-      "build": true,
-      "providerPlugin": "awscloudformation",
-      "service": "Lambda"
-    }
-  },
-  "parameters": {
-    "AMPLIFY_function_rest_deploymentBucketName": {
-      "usedBy": [
-        {
-          "category": "function",
-          "resourceName": "rest"
-        }
-      ]
-    },
-    "AMPLIFY_function_rest_s3Key": {
-      "usedBy": [
-        {
-          "category": "function",
-          "resourceName": "rest"
-        }
-      ]
-    }
-  }
+  "function": {}
 }

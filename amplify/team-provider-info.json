@@ -11,17 +11,6 @@
       "StackId": "arn:aws:cloudformation:us-east-1:887582307945:stack/amplify-synapsebackend-staging-141134/7b60e7f0-b128-11ed-bb66-0ec240785f9f",
       "AmplifyAppId": "d3p9g3rze4otp9",
       "NetworkStackS3Url": "https://s3.amazonaws.com/amplify-synapsebackend-staging-141134-deployment/amplify-cfn-templates/networkingStackTemplate.json"
-    },
-    "categories": {
-      "api": {
-        "synapsebackend": {}
-      },
-      "function": {
-        "rest": {
-          "deploymentBucketName": "amplify-synapsebackend-staging-141134-deployment",
-          "s3Key": "amplify-builds/rest-7376316f796664763138-build.zip"
-        }
-      }
     }
   }
 }
