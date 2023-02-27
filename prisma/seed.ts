@@ -7,27 +7,27 @@ async function main() {
 
   await prisma.group.create({
     data: {
-      Name: "Test Group",
-      Users: {
+      name: "Test Group",
+      users: {
         create: [{
-          Name: 'Alice',
-          Email: 'alice@example.com',
-          Password: 'alicepass'
+          name: 'Alice',
+          email: 'alice@example.com',
+          password: 'alicepass'
         },
         {
-          Name: 'Bob',
-          Email: 'bob@example.com',
-          Password: 'bobpass'
+          name: 'Bob',
+          email: 'bob@example.com',
+          password: 'bobpass'
         },
         {
-          Name: 'Charlie',
-          Email: 'charlie@example.com',
-          Password: 'charliepass'
+          name: 'Charlie',
+          email: 'charlie@example.com',
+          password: 'charliepass'
         },
         {
-          Name: 'Professor',
-          Email: 'professor@example.com',
-          Password: 'professorpass',
+          name: 'Professor',
+          email: 'professor@example.com',
+          password: 'professorpass',
         }
         ]
       }
