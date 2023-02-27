@@ -9,48 +9,48 @@ datasource db {
 
 model User {
   id         String       @id @unique @default(cuid())
-  Name       String?
-  Email      String?
-  Password   String?
-  Note       Note[]
-  Outline    Outline[]
-  Lecture    Lecture[]
-  Groups     Group[]
+  name       String?
+  email      String?
+  password   String?
+  note       Note[]
+  outline    Outline[]
+  lecture    Lecture[]
+  groups     Group[]
 }
 
 model Group {
   id         String       @id @unique @default(cuid())
-  Name       String?
-  Outline    Outline[]
-  Users      User[]
+  name       String?
+  outline    Outline[]
+  users      User[]
 }
 
 model Note {
   id        String   @id @unique @default(cuid())
-  Context   String?
-  Owner     User?    @relation(fields: [userId], references: [id])
-  Outline   Outline? @relation(fields: [outlineId], references: [id])
+  context   String?
+  owner     User?    @relation(fields: [userId], references: [id])
+  outline   Outline? @relation(fields: [outlineId], references: [id])
   userId    String?
   outlineId String?
 }
 
 model Outline {
   id      String    @id @unique @default(cuid())
-  Summary String?
-  Owner   User?     @relation(fields: [userId], references: [id])
-  Group   Group?    @relation(fields: [groupId], references: [id])
-  Note    Note[]
+  summary String?
+  owner   User?     @relation(fields: [userId], references: [id])
+  group   Group?    @relation(fields: [groupId], references: [id])
+  note    Note[]
   userId  String?
   groupId String?
-  Lecture Lecture[]
+  lecture Lecture[]
 }
 
 model Lecture {
   id         String    @id @unique @default(cuid())
-  Transcript String?
-  Youtube    String?
-  Outline    Outline?  @relation(fields: [outlineId], references: [id])
-  Owner      User?     @relation(fields: [userId], references: [id])
+  transcript String?
+  youtube    String?
+  outline    Outline?  @relation(fields: [outlineId], references: [id])
+  owner      User?     @relation(fields: [userId], references: [id])
   outlineId  String?
   userId     String?
 }
