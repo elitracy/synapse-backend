@@ -3,7 +3,7 @@ import express from 'express'
 import path from 'path'
 
 const prisma = new PrismaClient()
-export const app = express()
+const app = express()
 const port = process.env.PORT || 3000
 
 app.use(express.json())
@@ -103,3 +103,4 @@ app.listen(port, () =>
   console.log(`🦧 Server ready at: http://localhost:${port}`),
 )
 
+export default app
