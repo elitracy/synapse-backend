@@ -15,14 +15,14 @@ model User {
   Note       Note[]
   Outline    Outline[]
   Lecture    Lecture[]
-  User_Group User_Group[]
+  Groups     Group[]
 }
 
 model Group {
   id         String       @id @unique @default(cuid())
   Name       String?
   Outline    Outline[]
-  User_Group User_Group[]
+  Users      User[]
 }
 
 model Note {
@@ -48,17 +48,9 @@ model Outline {
 model Lecture {
   id         String    @id @unique @default(cuid())
   Transcript String?
-  Youtube    DateTime?
+  Youtube    String?
   Outline    Outline?  @relation(fields: [outlineId], references: [id])
   Owner      User?     @relation(fields: [userId], references: [id])
   outlineId  String?
   userId     String?
-}
-
-model User_Group {
-  id      String  @id @unique @default(cuid())
-  Group   Group?  @relation(fields: [groupId], references: [id])
-  User    User?   @relation(fields: [userId], references: [id])
-  groupId String?
-  userId  String?
 }
