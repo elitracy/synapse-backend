@@ -8,20 +8,57 @@ datasource db {
 }
 
 model User {
-  id    Int     @id @default(autoincrement())
-  email String  @unique
-  name  String?
-  posts Post[]
+  id         String       @id @unique @default(cuid())
+  Name       String?
+  Email      String?
+  Password   String?
+  Note       Note[]
+  Outline    Outline[]
+  Lecture    Lecture[]
+  User_Group User_Group[]
 }
 
-model Post {
-  id        Int      @id @default(autoincrement())
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  title     String
-  content   String?
-  published Boolean  @default(false)
-  viewCount Int      @default(0)
-  author    User?    @relation(fields: [authorId], references: [id])
-  authorId  Int?
+model Group {
+  id         String       @id @unique @default(cuid())
+  Name       String?
+  Outline    Outline[]
+  User_Group User_Group[]
+}
+
+model Note {
+  id        String   @id @unique @default(cuid())
+  Context   String?
+  Owner     User?    @relation(fields: [userId], references: [id])
+  Outline   Outline? @relation(fields: [outlineId], references: [id])
+  userId    String?
+  outlineId String?
+}
+
+model Outline {
+  id      String    @id @unique @default(cuid())
+  Summary String?
+  Owner   User?     @relation(fields: [userId], references: [id])
+  Group   Group?    @relation(fields: [groupId], references: [id])
+  Note    Note[]
+  userId  String?
+  groupId String?
+  Lecture Lecture[]
+}
+
+model Lecture {
+  id         String    @id @unique @default(cuid())
+  Transcript String?
+  Youtube    DateTime?
+  Outline    Outline?  @relation(fields: [outlineId], references: [id])
+  Owner      User?     @relation(fields: [userId], references: [id])
+  outlineId  String?
+  userId     String?
+}
+
+model User_Group {
+  id      String  @id @unique @default(cuid())
+  Group   Group?  @relation(fields: [groupId], references: [id])
+  User    User?   @relation(fields: [userId], references: [id])
+  groupId String?
+  userId  String?
 }
