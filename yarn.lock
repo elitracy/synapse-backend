@@ -185,6 +185,11 @@ call-bind@^1.0.0:
     function-bind "^1.1.1"
     get-intrinsic "^1.0.2"
 
+commander@^2.11.0:
+  version "2.20.3"
+  resolved "https://registry.yarnpkg.com/commander/-/commander-2.20.3.tgz#fd485e84c03eb4881c20722ba48035e8531aeb33"
+  integrity sha512-GpVkmM8vF2vQUkj2LvZmD35JxeJOLCwJ9cUkugyk2nuhbv3+mJvpLYYt+0+USMxE+oj+ey/lJEnhZw75x/OMcQ==
+
 content-disposition@0.5.4:
   version "0.5.4"
   resolved "https://registry.yarnpkg.com/content-disposition/-/content-disposition-0.5.4.tgz#8b82b4efac82512a02bb0b1dcec9d2c5e8eb5bfe"
@@ -560,6 +565,13 @@ ts-node@10.9.1:
     make-error "^1.1.1"
     v8-compile-cache-lib "^3.0.1"
     yn "3.1.1"
+
+tsnodemon@^1.2.2:
+  version "1.2.2"
+  resolved "https://registry.yarnpkg.com/tsnodemon/-/tsnodemon-1.2.2.tgz#9eef32f74e8abf7f4ac7bb7d224cb3f4bd2b877c"
+  integrity sha512-1ceEvuuihwQQMLCYrKuZi2i8pemhuMiCy1nPev59cJM7JLtz7txHX3WQyhcc6zOvyBjt1Gbcg5yd53QjEw046Q==
+  dependencies:
+    commander "^2.11.0"
 
 type-is@~1.6.18:
   version "1.6.18"
