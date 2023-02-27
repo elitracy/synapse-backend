@@ -1,12 +1,18 @@
 import { PrismaClient } from '@prisma/client'
 import express from 'express'
+import path from 'path'
 
 const prisma = new PrismaClient()
 const app = express()
+const port = process.env.PORT || 3000
 
 app.use(express.json())
+app.use(express.static('public'))
 
-app.get('/allUsers', async (_, res) => {
+app.get('/', (_, res) => {
+  res.sendFile('index.html', { root: path.join(__dirname, 'public') });
+})
+app.get('/users', async (_, res) => {
   prisma.user.findMany().then((user) => {
     res.status(200).json(user)
   }).catch((err) => {
@@ -93,6 +99,8 @@ app.put('/users/password/:id', async (req, res) => {
   })
 })
 
-app.listen(3000, () =>
-  console.log(`🦧 Server ready at: http://localhost:3000`),
+app.listen(port, () =>
+  console.log(`🦧 Server ready at: http://localhost:${port}`),
 )
+
+export default app
