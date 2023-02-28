@@ -1,18 +1,10 @@
+import express from "express"
 import { PrismaClient } from '@prisma/client'
-import express from 'express'
-import path from 'path'
-
 const prisma = new PrismaClient()
-const app = express()
-const port = process.env.PORT || 3000
 
-app.use(express.json())
-app.use(express.static('public'))
+const router = express.Router()
 
-app.get('/', (_, res) => {
-  res.sendFile('index.html', { root: path.join(__dirname, 'public') });
-})
-app.get('/users', async (_, res) => {
+router.get('/', async (_, res) => {
   prisma.user.findMany().then((user) => {
     res.status(200).json(user)
   }).catch((err) => {
@@ -20,7 +12,8 @@ app.get('/users', async (_, res) => {
   })
 })
 
-app.get('/users/:id', async (req, res) => {
+
+router.get('/:id', async (req, res) => {
   const { id } = req.params
 
   prisma.user
@@ -33,7 +26,7 @@ app.get('/users/:id', async (req, res) => {
     })
 })
 
-app.post('/users', async (req, res) => {
+router.post('/', async (req, res) => {
   const { name, email, password } = req.body
   prisma.user.create({
     data: {
@@ -46,7 +39,7 @@ app.post('/users', async (req, res) => {
   })
 })
 
-app.delete('/users/:id', async (req, res) => {
+router.delete('/:id', async (req, res) => {
   const { id } = req.params
   prisma.user.delete({
     where: { id },
@@ -57,7 +50,7 @@ app.delete('/users/:id', async (req, res) => {
   })
 })
 
-app.put('/users/name/:id', async (req, res) => {
+router.put('/name/:id', async (req, res) => {
   const { id } = req.params
   let { name } = req.body
 
@@ -71,7 +64,7 @@ app.put('/users/name/:id', async (req, res) => {
   })
 })
 
-app.put('/users/email/:id', async (req, res) => {
+router.put('/email/:id', async (req, res) => {
   const { id } = req.params
   let { email } = req.body
 
@@ -85,7 +78,7 @@ app.put('/users/email/:id', async (req, res) => {
   })
 })
 
-app.put('/users/password/:id', async (req, res) => {
+router.put('/password/:id', async (req, res) => {
   const { id } = req.params
   let { password } = req.body
 
@@ -99,8 +92,4 @@ app.put('/users/password/:id', async (req, res) => {
   })
 })
 
-app.listen(port, () =>
-  console.log(`🦧 Server ready at: http://localhost:${port}`),
-)
-
-export default app
+export default router
