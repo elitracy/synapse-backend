@@ -1,5 +1,6 @@
 import express from 'express'
 import path from 'path'
+import cors from 'cors'
 
 const app = express()
 const port = process.env.PORT || 3000
@@ -9,6 +10,7 @@ import notes from "./api/notes"
 
 app.use(express.json())
 app.use(express.static('public'))
+app.use(cors())
 
 app.use("/api/users", users)
 app.use("/api/notes", notes)
