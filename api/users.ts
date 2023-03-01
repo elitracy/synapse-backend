@@ -92,4 +92,18 @@ router.put('/password/:id', async (req, res) => {
   })
 })
 
+// Get all notes for a particular user
+router.get('/:userId/notes', async (req, res) => {
+  const { userId } = req.params
+
+  prisma.note
+    .findMany({
+      where: { userId },
+    }).then((note) => {
+      res.status(200).json(note)
+    }).catch((err) => {
+      res.status(400).json(err)
+    })
+})
+
 export default router
