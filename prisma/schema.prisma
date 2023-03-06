@@ -29,6 +29,7 @@ model Group {
 
 model Note {
   id        String   @id @unique @default(cuid())
+  title     String?
   context   String?
   owner     User?    @relation(fields: [userId], references: [id])
   outline   Outline? @relation(fields: [outlineId], references: [id])
