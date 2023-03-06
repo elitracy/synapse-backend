@@ -26,7 +26,7 @@ router.get('/user/:id', async (req, res) => {
     })
 })
 
-router.get('/email', async (req, res) => {
+router.post('/email', async (req, res) => {
   const { email } = req.body
   console.log(req.body)
   prisma.user
@@ -40,7 +40,7 @@ router.get('/email', async (req, res) => {
 })
 
 router.post('/', async (req, res) => {
-  const { name, email, password } = req.body
+  const { name, email, password } = JSON.parse(req.body)
   prisma.user.create({
     data: {
       name, email, password
