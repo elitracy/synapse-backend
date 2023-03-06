@@ -13,12 +13,25 @@ router.get('/', async (_, res) => {
 })
 
 
-router.get('/:id', async (req, res) => {
+router.get('/user/:id', async (req, res) => {
   const { id } = req.params
 
   prisma.user
     .findUnique({
       where: { id },
+    }).then((user) => {
+      res.status(200).json(user)
+    }).catch((err) => {
+      res.status(400).json(err)
+    })
+})
+
+router.get('/email', async (req, res) => {
+  const { email } = req.body
+  console.log(req.body)
+  prisma.user
+    .findUnique({
+      where: { email },
     }).then((user) => {
       res.status(200).json(user)
     }).catch((err) => {
