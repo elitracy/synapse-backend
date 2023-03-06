@@ -17,6 +17,7 @@ model User {
   outline    Outline[]
   lecture    Lecture[]
   groups     Group[]
+  @@unique([email])
 }
 
 model Group {
