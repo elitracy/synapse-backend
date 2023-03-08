@@ -4,6 +4,8 @@ const prisma = new PrismaClient()
 
 const router = express.Router()
 
+// ============================= GET =============================
+
 router.get('/', async (_, res) => {
   prisma.note.findMany().then((note) => {
     res.status(200).json(note)
@@ -26,7 +28,7 @@ router.get('/:id', async (req, res) => {
     })
 })
 
-
+// ============================= POST =============================
 
 router.post('/', async (req, res) => {
   const { context, userId } = req.body
@@ -41,16 +43,7 @@ router.post('/', async (req, res) => {
   })
 })
 
-router.delete('/:id', async (req, res) => {
-  const { id } = req.params
-  prisma.note.delete({
-    where: { id },
-  }).then((note) => {
-    res.status(200).json(note)
-  }).catch((err) => {
-    res.status(400).json(err)
-  })
-})
+// ============================= PUT =============================
 
 router.put('/context/:id', async (req, res) => {
   const { id } = req.params
@@ -59,6 +52,19 @@ router.put('/context/:id', async (req, res) => {
   prisma.note.update({
     where: { id },
     data: { context },
+  }).then((note) => {
+    res.status(200).json(note)
+  }).catch((err) => {
+    res.status(400).json(err)
+  })
+})
+
+// ============================= DELETE =============================
+
+router.delete('/:id', async (req, res) => {
+  const { id } = req.params
+  prisma.note.delete({
+    where: { id },
   }).then((note) => {
     res.status(200).json(note)
   }).catch((err) => {

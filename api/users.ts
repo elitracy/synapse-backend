@@ -4,6 +4,8 @@ const prisma = new PrismaClient()
 
 const router = express.Router()
 
+// ============================= GET =============================
+
 router.get('/', async (_, res) => {
   prisma.user.findMany().then((user) => {
     res.status(200).json(user)
@@ -54,6 +56,8 @@ router.get('/:id/groups', async (req, res) => {
     })
 })
 
+// ============================= POST =============================
+
 router.post('/email', async (req, res) => {
   const { email } = req.body
   prisma.user
@@ -78,6 +82,8 @@ router.post('/', async (req, res) => {
     res.status(400).json(err)
   })
 })
+
+// ============================= PUT =============================
 
 
 router.put('/:id/password', async (req, res) => {
@@ -121,6 +127,8 @@ router.put('/:id/name', async (req, res) => {
     res.status(400).json(err)
   })
 })
+
+// ============================= DELETE =============================
 
 router.delete('/:id', async (req, res) => {
   const { id } = req.params
