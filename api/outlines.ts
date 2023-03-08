@@ -40,7 +40,6 @@ router.post('/', async (req, res) => {
   }).then((outline) => {
     res.status(200).json(outline)
   }).catch((err) => {
-    console.error(err)
     res.status(400).json(err)
   })
 })

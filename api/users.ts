@@ -39,7 +39,6 @@ router.get('/:userId/notes', async (req, res) => {
       console.log(note)
       res.status(200).json(note)
     }).catch((err) => {
-      console.error(err)
       res.status(400).json(err)
     })
 })
