@@ -4,6 +4,8 @@
   "license": "MIT",
   "scripts": {
     "dev": "tsnodemon -x 'ts-node index.ts'",
+    "dev:debug": "tsnodemon -x 'ts-node index.ts --trace-deprecation'",
+    "start": "ts-node index.ts",
     "start": "ts-node index.ts",
     "vercel-build": "prisma generate && prisma migrate deploy",
     "test": "yarn dev && ts-node test.ts"

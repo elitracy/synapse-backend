@@ -30,7 +30,8 @@ router.post('/', async (req, res) => {
       lecture: {
         create:
         {
-          transcript
+          transcript,
+          userId
         }
 
       }
