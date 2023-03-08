@@ -39,13 +39,13 @@ model Note {
 
 model Outline {
   id      String    @id @unique @default(cuid())
-  summary String?
+  contentTree String?
   owner   User?     @relation(fields: [userId], references: [id])
   group   Group?    @relation(fields: [groupId], references: [id])
   note    Note[]
   userId  String?
   groupId String?
-  lecture Lecture[]
+  lecture Lecture?
 }
 
 model Lecture {
@@ -54,6 +54,6 @@ model Lecture {
   youtube    String?
   outline    Outline?  @relation(fields: [outlineId], references: [id])
   owner      User?     @relation(fields: [userId], references: [id])
-  outlineId  String?
+  outlineId  String?   @unique
   userId     String?
 }

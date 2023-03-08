@@ -29,15 +29,17 @@ router.get('/:id', async (req, res) => {
 })
 
 // Get all notes for a particular user
-router.get('/:id/notes', async (req, res) => {
-  const { id } = req.params
+router.get('/:userId/notes', async (req, res) => {
+  const { userId } = req.params
 
   prisma.note
     .findMany({
-      where: { id },
+      where: { userId },
     }).then((note) => {
+      console.log(note)
       res.status(200).json(note)
     }).catch((err) => {
+      console.error(err)
       res.status(400).json(err)
     })
 })
@@ -58,18 +60,6 @@ router.get('/:id/groups', async (req, res) => {
 
 // ============================= POST =============================
 
-router.post('/email', async (req, res) => {
-  const { email } = req.body
-  prisma.user
-    .findUnique({
-      where: { email },
-    }).then((user) => {
-      res.status(200).json(user)
-    }).catch((err) => {
-      res.status(400).json(err)
-    })
-})
-
 router.post('/', async (req, res) => {
   const { name, email, password } = req.body
   prisma.user.create({
@@ -81,6 +71,18 @@ router.post('/', async (req, res) => {
   }).catch((err) => {
     res.status(400).json(err)
   })
+})
+
+router.post('/email', async (req, res) => {
+  const { email } = req.body
+  prisma.user
+    .findUnique({
+      where: { email },
+    }).then((user) => {
+      res.status(200).json(user)
+    }).catch((err) => {
+      res.status(400).json(err)
+    })
 })
 
 // ============================= PUT =============================
