@@ -40,6 +40,20 @@ router.get('/:id/notes', async (req, res) => {
     })
 })
 
+router.get('/:id/groups', async (req, res) => {
+  const { id } = req.params
+
+  prisma.user
+    .findMany({
+      where: { id },
+      include: { groups: true},
+    }).then((user) => {
+      res.status(200).json(user)
+    }).catch((err) => {
+      res.status(400).json(err)
+    })
+})
+
 router.post('/email', async (req, res) => {
   const { email } = req.body
   prisma.user
