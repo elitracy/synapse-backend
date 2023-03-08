@@ -10,7 +10,10 @@ import speech_recognition as sr
 from pydub import AudioSegment
 from pydub.silence import split_on_silence
 import os
-filename = "quantum algo problems.wav"
+import sys
+if(len(sys.argv)<2):
+    raise Exception("Need to have a file argument")
+filename = sys.argv[1]
 r = sr.Recognizer()
 
 """
@@ -28,13 +31,13 @@ def get_large_audio_transcription(path):
     """
     # open the audio file using pydub
     sound = AudioSegment.from_wav(path)  
-    # split audio sound where silence is 700 miliseconds or more and get chunks
+    # split audio sound
     chunks = split_on_silence(sound,
-        # experiment with this value for your target audio file
+        # Longer length = more conistent
         min_silence_len = 300,
-        # adjust this per requirement
+        # Silence threshold, might shift to be dynamic
         silence_thresh = sound.dBFS-1,
-        # keep the silence for 1 second, adjustable as well
+        # keep the silence, as padding.
         keep_silence=200,
     )
     folder_name = "audio-chunks"
@@ -62,4 +65,5 @@ def get_large_audio_transcription(path):
                 whole_text += text
     # return the text for all chunks detected
     return whole_text
-print(get_large_audio_transcription(filename))
+    
+#print(get_large_audio_transcription(filename))
