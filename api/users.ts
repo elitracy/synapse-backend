@@ -13,7 +13,7 @@ router.get('/', async (_, res) => {
 })
 
 
-router.get('/user/:id', async (req, res) => {
+router.get('/:id', async (req, res) => {
   const { id } = req.params
 
   prisma.user
@@ -21,6 +21,20 @@ router.get('/user/:id', async (req, res) => {
       where: { id },
     }).then((user) => {
       res.status(200).json(user)
+    }).catch((err) => {
+      res.status(400).json(err)
+    })
+})
+
+// Get all notes for a particular user
+router.get('/:id/notes', async (req, res) => {
+  const { id } = req.params
+
+  prisma.note
+    .findMany({
+      where: { id },
+    }).then((note) => {
+      res.status(200).json(note)
     }).catch((err) => {
       res.status(400).json(err)
     })
@@ -51,48 +65,10 @@ router.post('/', async (req, res) => {
   })
 })
 
-router.delete('/:id', async (req, res) => {
+
+router.put('/:id/password', async (req, res) => {
   const { id } = req.params
-  prisma.user.delete({
-    where: { id },
-  }).then((user) => {
-    res.status(200).json(user)
-  }).catch((err) => {
-    res.status(400).json(err)
-  })
-})
-
-router.put('/name/:id', async (req, res) => {
-  const { id } = req.params
-  let { name } = req.body
-
-  prisma.user.update({
-    where: { id },
-    data: { name },
-  }).then((user) => {
-    res.status(200).json(user)
-  }).catch((err) => {
-    res.status(400).json(err)
-  })
-})
-
-router.put('/email/:id', async (req, res) => {
-  const { id } = req.params
-  let { email } = req.body
-
-  prisma.user.update({
-    where: { id },
-    data: { email },
-  }).then((user) => {
-    res.status(200).json(user)
-  }).catch((err) => {
-    res.status(400).json(err)
-  })
-})
-
-router.put('/password/:id', async (req, res) => {
-  const { id } = req.params
-  let { password } = req.body
+  const { password } = req.body
 
   prisma.user.update({
     where: { id },
@@ -104,18 +80,43 @@ router.put('/password/:id', async (req, res) => {
   })
 })
 
-// Get all notes for a particular user
-router.get('/:userId/notes', async (req, res) => {
-  const { userId } = req.params
+router.put('/:id/email', async (req, res) => {
+  const { id } = req.params
+  const { email } = req.body
 
-  prisma.note
-    .findMany({
-      where: { userId },
-    }).then((note) => {
-      res.status(200).json(note)
-    }).catch((err) => {
-      res.status(400).json(err)
-    })
+  prisma.user.update({
+    where: { id },
+    data: { email },
+  }).then((user) => {
+    res.status(200).json(user)
+  }).catch((err) => {
+    res.status(400).json(err)
+  })
+})
+
+router.put('/:id/name', async (req, res) => {
+  const { id } = req.params
+  const { name } = req.body
+
+  prisma.user.update({
+    where: { id },
+    data: { name },
+  }).then((user) => {
+    res.status(200).json(user)
+  }).catch((err) => {
+    res.status(400).json(err)
+  })
+})
+
+router.delete('/:id', async (req, res) => {
+  const { id } = req.params
+  prisma.user.delete({
+    where: { id },
+  }).then((user) => {
+    res.status(200).json(user)
+  }).catch((err) => {
+    res.status(400).json(err)
+  })
 })
 
 export default router
