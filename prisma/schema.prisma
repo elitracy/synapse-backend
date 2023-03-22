@@ -3,57 +3,30 @@ generator client {
 }
 
 datasource db {
-  provider = "postgresql"
-  url = env("DATABASE_URL")
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
   directUrl = env("DIRECT_URL")
 }
 
 model User {
-  id         String       @id @unique @default(cuid())
-  name       String
-  email      String
-  password   String
-  note       Note[]
-  outline    Outline[]
-  lecture    Lecture[]
-  groups     Group[]
-  @@unique([email])
-}
-
-model Group {
-  id         String       @id @unique @default(cuid())
-  name       String?
-  outline    Outline[]
-  users      User[]
+  id       String @id @unique
+  name     String
+  email    String
+  password String
+  Note     Note[]
 }
 
 model Note {
-  id        String   @id @unique @default(cuid())
-  title     String?
-  context   String?
-  owner     User?    @relation(fields: [userId], references: [id])
-  outline   Outline? @relation(fields: [outlineId], references: [id])
-  userId    String?
-  outlineId String?
-}
-
-model Outline {
-  id      String    @id @unique @default(cuid())
-  contentTree String?
-  owner   User?     @relation(fields: [userId], references: [id])
-  group   Group?    @relation(fields: [groupId], references: [id])
-  note    Note[]
+  id      String   @id @unique
+  content String?
+  user    User?    @relation(fields: [userId], references: [id])
   userId  String?
-  groupId String?
-  lecture Lecture?
+  public  Boolean?
+  tags    Tag[]
 }
 
-model Lecture {
-  id         String    @id @unique @default(cuid())
-  transcript String?
-  youtube    String?
-  outline    Outline?  @relation(fields: [outlineId], references: [id])
-  owner      User?     @relation(fields: [userId], references: [id])
-  outlineId  String?   @unique
-  userId     String?
+model Tag {
+  id    String  @id @unique @default(cuid())
+  name  String?
+  notes Note[]
 }
