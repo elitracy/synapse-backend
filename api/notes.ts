@@ -45,7 +45,7 @@ router.post('/', async (req, res) => {
 
 // ============================= PUT =============================
 
-router.put('/context/:id', async (req, res) => {
+router.put('/content/:id', async (req, res) => {
   const { id } = req.params
   let { content } = req.body
 
@@ -58,6 +58,36 @@ router.put('/context/:id', async (req, res) => {
     res.status(400).json(err)
   })
 })
+
+router.put('/tags/:id', async (req, res) => {
+  const { id } = req.params
+  let { tags }: { tags: string[] } = req.body
+
+  tags.forEach(tag => {
+    prisma.note.update({
+      where: { id },
+      data: {
+        tags: {
+          upsert: {
+            where: { name: tag },
+            update: {},
+            create: { name: tag }
+          }
+        }
+      }
+    }).catch(err => { res.status(400).json(err) })
+  })
+
+  prisma.note.findUnique({
+    where: { id },
+  }).then((note) => {
+    res.status(200).json(note)
+  }).catch((err) => {
+    console.log(err)
+    res.status(400).json(err)
+  })
+})
+
 
 // ============================= DELETE =============================
 

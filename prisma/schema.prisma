@@ -27,6 +27,6 @@ model Note {
 
 model Tag {
   id    String  @id @unique @default(cuid())
-  name  String?
+  name  String? @unique
   notes Note[]
 }
