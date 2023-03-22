@@ -63,20 +63,26 @@ router.put('/tags/:id', async (req, res) => {
   const { id } = req.params
   let { tags }: { tags: string[] } = req.body
 
-  tags.forEach(tag => {
-    prisma.note.update({
-      where: { id },
-      data: {
-        tags: {
-          upsert: {
+  await prisma.note.update({
+    where: { id },
+    data: {
+      tags: { set: [] }
+    }
+  })
+
+  await prisma.note.update({
+    where: { id },
+    data: {
+      tags: {
+        connectOrCreate: tags.map(tag => {
+          return {
             where: { name: tag },
-            update: {},
             create: { name: tag }
           }
-        }
+        })
       }
-    }).catch(err => { res.status(400).json(err) })
-  })
+    }
+  }).catch(err => console.error(err))
 
   prisma.note.findUnique({
     where: { id },
