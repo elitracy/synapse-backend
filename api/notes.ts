@@ -31,10 +31,10 @@ router.get('/:id', async (req, res) => {
 // ============================= POST =============================
 
 router.post('/', async (req, res) => {
-  const { context, userId } = req.body
+  const { content, userId } = req.body
   prisma.note.create({
     data: {
-      context, userId
+      content, userId
     },
   }).then((note) => {
     res.status(200).json(note)
@@ -47,11 +47,11 @@ router.post('/', async (req, res) => {
 
 router.put('/context/:id', async (req, res) => {
   const { id } = req.params
-  let { context } = req.body
+  let { content } = req.body
 
   prisma.note.update({
     where: { id },
-    data: { context },
+    data: { content },
   }).then((note) => {
     res.status(200).json(note)
   }).catch((err) => {
