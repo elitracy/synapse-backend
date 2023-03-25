@@ -28,6 +28,21 @@ router.get('/:id', async (req, res) => {
     })
 })
 
+
+router.get('/tag/:id', async (req, res) => {
+  const { id } = req.params
+
+  prisma.note
+    .findMany({
+      where: { tags: {some: {id : id}} },
+    }).then((note) => {
+      res.status(200).json(note)
+    }).catch((err) => {
+      res.status(400).json(err)
+    })
+})
+
+
 // ============================= POST =============================
 
 router.post('/', async (req, res) => {
@@ -59,40 +74,40 @@ router.put('/content/:id', async (req, res) => {
   })
 })
 
-router.put('/tags/:id', async (req, res) => {
-  const { id } = req.params
-  let { tags }: { tags: string[] } = req.body
+// router.put('/tags/:id', async (req, res) => {
+//   const { id } = req.params
+//   let { tags }: { tags: string[] } = req.body
 
-  await prisma.note.update({
-    where: { id },
-    data: {
-      tags: { set: [] }
-    }
-  })
+//   await prisma.note.update({
+//     where: { id },
+//     data: {
+//       tags: { set: [] }
+//     }
+//   })
 
-  await prisma.note.update({
-    where: { id },
-    data: {
-      tags: {
-        connectOrCreate: tags.map(tag => {
-          return {
-            where: { name: tag },
-            create: { name: tag }
-          }
-        })
-      }
-    }
-  }).catch(err => console.error(err))
+//   await prisma.note.update({
+//     where: { id },
+//     data: {
+//       tags: {
+//         connectOrCreate: tags.map(tag => {
+//           return {
+//             where: { name: tag },
+//             create: { name: tag }
+//           }
+//         })
+//       }
+//     }
+//   }).catch(err => console.error(err))
 
-  prisma.note.findUnique({
-    where: { id },
-  }).then((note) => {
-    res.status(200).json(note)
-  }).catch((err) => {
-    console.log(err)
-    res.status(400).json(err)
-  })
-})
+//   prisma.note.findUnique({
+//     where: { id },
+//   }).then((note) => {
+//     res.status(200).json(note)
+//   }).catch((err) => {
+//     console.log(err)
+//     res.status(400).json(err)
+//   })
+// })
 
 
 // ============================= DELETE =============================
