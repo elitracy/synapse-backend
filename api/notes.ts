@@ -28,13 +28,28 @@ router.get('/:id', async (req, res) => {
     })
 })
 
-
+// get all notes with a specific tag given the tagID
 router.get('/tag/:id', async (req, res) => {
   const { id } = req.params
 
   prisma.note
     .findMany({
       where: { tags: {some: {id : id}} },
+    }).then((note) => {
+      res.status(200).json(note)
+    }).catch((err) => {
+      res.status(400).json(err)
+    })
+})
+
+// get a note by id and include all of its tags
+router.get('/:id/tags', async (req, res) => {
+  const { id } = req.params
+
+  prisma.note
+    .findFirst({
+      where: { id },
+      include: {tags : true},
     }).then((note) => {
       res.status(200).json(note)
     }).catch((err) => {
