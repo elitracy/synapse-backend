@@ -42,6 +42,25 @@ router.get('/tag/:id', async (req, res) => {
     })
 })
 
+// get count of notes with a specific tag that are public
+router.get('/tag/:id/count', async (req, res) => {
+  const { id } = req.params
+
+  prisma.note.groupBy({
+    by: ['public'],
+    where: { tags: {some: {id : id}} },
+    _count: {
+        id: true
+    }
+      
+      
+    }).then((note) => {
+      res.status(200).json(note)
+    }).catch((err) => {
+      res.status(400).json(err)
+    })
+})
+
 // get a note by id and include all of its tags
 router.get('/:id/tags', async (req, res) => {
   const { id } = req.params
