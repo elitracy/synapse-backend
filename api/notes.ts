@@ -76,14 +76,13 @@ router.get('/:id/tags', async (req, res) => {
     })
 })
 
-
 // ============================= POST =============================
 
 router.post('/', async (req, res) => {
-  const { content, userId } = req.body
+  const { content, userId, title } = req.body
   prisma.note.create({
     data: {
-      content, userId
+      content, userId, title
     },
   }).then((note) => {
     res.status(200).json(note)
@@ -101,6 +100,20 @@ router.put('/content/:id', async (req, res) => {
   prisma.note.update({
     where: { id },
     data: { content },
+  }).then((note) => {
+    res.status(200).json(note)
+  }).catch((err) => {
+    res.status(400).json(err)
+  })
+})
+
+router.put('/title/:id', async (req, res) => {
+  const { id } = req.params
+  let { title } = req.body
+
+  prisma.note.update({
+    where: { id },
+    data: { title },
   }).then((note) => {
     res.status(200).json(note)
   }).catch((err) => {
