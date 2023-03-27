@@ -47,7 +47,7 @@ router.get('/tag/:id/count', async (req, res) => {
   const { id } = req.params
 
   prisma.note.groupBy({
-    by: ['public'],
+    by: ['isPublic'],
     where: { tags: { some: { id: id } } },
     _count: {
       id: true
@@ -79,10 +79,10 @@ router.get('/:id/tags', async (req, res) => {
 // ============================= POST =============================
 
 router.post('/', async (req, res) => {
-  const { content, userId, title } = req.body
+  const { content, userId, title, isPublic} = req.body
   prisma.note.create({
     data: {
-      content, userId, title
+      content, userId, title, isPublic 
     },
   }).then((note) => {
     res.status(200).json(note)
@@ -114,6 +114,20 @@ router.put('/title/:id', async (req, res) => {
   prisma.note.update({
     where: { id },
     data: { title },
+  }).then((note) => {
+    res.status(200).json(note)
+  }).catch((err) => {
+    res.status(400).json(err)
+  })
+})
+
+router.put('/isPublic/:id', async (req, res) => {
+  const { id } = req.params
+  let { isPublic } = req.body
+
+  prisma.note.update({
+    where: { id },
+    data: { isPublic },
   }).then((note) => {
     res.status(200).json(note)
   }).catch((err) => {
