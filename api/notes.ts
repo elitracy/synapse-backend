@@ -82,18 +82,30 @@ router.get('/tags/recommend', async (req, res) => {
 
   const { content }: { content: string } = req.body
 
-  console.log(content)
-
-  const extraction_result = keyword_extractor.extract(content, {
+  const recommended_tags = keyword_extractor.extract(content, {
     language: "english",
     remove_digits: true,
     return_changed_case: true,
-    remove_duplicates: true,
+    remove_duplicates: false,
   });
 
-  console.log(extraction_result)
+  // get count of keywords
+  const tag_counts = recommended_tags.reduce((acc: { [key: string]: number }, curr: string) => {
+    if (curr in acc) {
+      acc[curr]++
+    } else {
+      acc[curr] = 1;
+    }
+    return acc;
+  }, {});
 
-  res.status(400).json({ body: extraction_result })
+
+  // sort keywords by highest count
+  const sorted_tag_counts = Object.entries(tag_counts)
+    .sort((a, b) => b[1] - a[1])
+    .map(pair => pair[0]);
+
+  res.status(400).json({ recommended_tags: sorted_tag_counts })
 })
 
 
