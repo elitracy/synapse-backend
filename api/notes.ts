@@ -87,23 +87,20 @@ router.get('/tags/recommend', async (req, res) => {
     remove_digits: true,
     return_changed_case: true,
     remove_duplicates: false,
-  });
+  })
 
   // get count of keywords
   const tag_counts = recommended_tags.reduce((acc: { [key: string]: number }, curr: string) => {
-    if (curr in acc) {
-      acc[curr]++
-    } else {
-      acc[curr] = 1;
-    }
-    return acc;
-  }, {});
+    if (curr in acc) acc[curr]++
+    else acc[curr] = 1
+    return acc
+  }, {})
 
 
   // sort keywords by highest count
   const sorted_tag_counts = Object.entries(tag_counts)
     .sort((a, b) => b[1] - a[1])
-    .map(pair => pair[0]);
+    .map(pair => pair[0])
 
   res.status(400).json({ recommended_tags: sorted_tag_counts })
 })

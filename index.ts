@@ -18,7 +18,7 @@ app.use("/api/notes", notes)
 app.use("/api/tags", tags)
 
 app.get('/', (_, res) => {
-  res.sendFile('index.html', { root: path.join(__dirname, 'public') });
+  res.sendFile('index.html', { root: path.join(__dirname, 'public') })
 })
 
 app.listen(port, () =>
