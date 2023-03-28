@@ -1,5 +1,7 @@
 import express from "express"
 import { PrismaClient } from '@prisma/client'
+import keyword_extractor from 'keyword-extractor'
+
 const prisma = new PrismaClient()
 
 const router = express.Router()
@@ -76,13 +78,33 @@ router.get('/:id/tags', async (req, res) => {
     })
 })
 
+router.get('/tags/recommend', async (req, res) => {
+
+  const { content }: { content: string } = req.body
+
+  console.log(content)
+
+  const extraction_result = keyword_extractor.extract(content, {
+    language: "english",
+    remove_digits: true,
+    return_changed_case: true,
+    remove_duplicates: true,
+  });
+
+  console.log(extraction_result)
+
+  res.status(400).json({ body: extraction_result })
+})
+
+
+
 // ============================= POST =============================
 
 router.post('/', async (req, res) => {
-  const { content, userId, title, isPublic} = req.body
+  const { content, userId, title, isPublic } = req.body
   prisma.note.create({
     data: {
-      content, userId, title, isPublic 
+      content, userId, title, isPublic
     },
   }).then((note) => {
     res.status(200).json(note)

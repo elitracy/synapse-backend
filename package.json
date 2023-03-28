@@ -6,7 +6,6 @@
     "dev": "tsnodemon -x 'ts-node index.ts'",
     "dev:debug": "tsnodemon -x 'ts-node index.ts --trace-deprecation'",
     "start": "ts-node index.ts",
-    "start": "ts-node index.ts",
     "vercel-build": "prisma generate && prisma migrate deploy",
     "test": "yarn dev && ts-node test.ts"
   },
@@ -14,6 +13,7 @@
     "@prisma/client": "^4.11.0",
     "express": "4.18.2",
     "global": "^4.4.0",
+    "keyword-extractor": "^0.0.25",
     "vercel": "^28.16.8"
   },
   "devDependencies": {
