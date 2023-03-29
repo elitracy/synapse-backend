@@ -1,5 +1,5 @@
 # Synapse Note
-[Synapse Note](synapsenote.com) 
+[Synapse Note](https://synapsenote.com) 
 
 Syanpse note is a Smart-Note platform that allows users to generate concept maps from their notes using artificial intelligence.
 
