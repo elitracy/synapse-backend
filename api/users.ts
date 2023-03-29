@@ -29,14 +29,14 @@ router.get('/:id', async (req, res) => {
 })
 
 // Get all notes for a particular user
-router.get('/:id/notes', async (req, res) => {
-  const { id } = req.params
+router.get('/:userId/notes', async (req, res) => {
+  const { userId } = req.params
 
   prisma.note
     .findMany({
-      where: { id },
+      where: { userId },
     }).then((note) => {
-      console.log(note)
+      //console.log(note)
       res.status(200).json(note)
     }).catch((err) => {
       res.status(400).json(err)
