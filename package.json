@@ -7,7 +7,7 @@
     "dev:debug": "tsnodemon -x 'ts-node index.ts --trace-deprecation'",
     "start": "ts-node index.ts",
     "vercel-build": "prisma generate && prisma migrate deploy",
-    "test": "yarn dev && ts-node test.ts"
+    "test": "jest"
   },
   "dependencies": {
     "@prisma/client": "^4.11.0",
@@ -17,12 +17,18 @@
     "vercel": "^28.16.8"
   },
   "devDependencies": {
+    "@babel/core": "^7.21.4",
+    "@babel/preset-env": "^7.21.4",
+    "@babel/preset-typescript": "^7.21.4",
     "@types/cors": "^2.8.13",
     "@types/express": "4.17.17",
     "@types/node": "18.14.2",
+    "babel-jest": "^29.5.0",
     "cors": "^2.8.5",
+    "jest": "^29.5.0",
     "newman": "^5.3.2",
     "prisma": "^4.11.0",
+    "supertest": "^6.3.3",
     "ts-node": "10.9.1",
     "tsnodemon": "^1.2.2",
     "typescript": "4.9.5"
