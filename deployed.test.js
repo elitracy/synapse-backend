@@ -19,5 +19,20 @@ describe('Backend Status', () => {
 
 		expect(response.statusCode).toBe(200);
 	});
+
+
+	it('Make a user', async () => {
+		const response = await request(backend)
+		  .post('/api/users')
+		  .send({
+			"name": "jest",
+			"email": "jest@gmail.com",
+			"password": "jestPass"
+		  });
+		expect(response.statusCode).toBe(200)
+		// expect(response.body).toMatchObject({completed: true, id: 1})
+	  });
 });
+
+
 
