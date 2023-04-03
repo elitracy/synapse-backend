@@ -4,3 +4,4 @@ build
 
 prisma/*.db*
 .vercel
+.env.*
