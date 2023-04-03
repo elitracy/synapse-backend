@@ -1,12 +1,8 @@
 import express from "express"
 import { PrismaClient } from '@prisma/client'
-<<<<<<< HEAD
 import keyword_extractor from 'keyword-extractor'
-
-=======
-import gptAskQuestion from "../gptUtils/gptAskQuestion"
 import askQuestion from "../gptUtils/gptAskQuestion"
->>>>>>> 8b1752e (added gpt question endpoint)
+
 const prisma = new PrismaClient()
 
 const router = express.Router()
@@ -88,8 +84,7 @@ router.get('/tags/recommend', async (req, res) => {
   const { content }: { content: string } = req.body
 
   const recommended_tags = keyword_extractor.extract(content, {
-    language: "english",
-    remove_digits: true,
+    language: "english", remove_digits: true,
     return_changed_case: true,
     remove_duplicates: false,
   })
@@ -107,10 +102,21 @@ router.get('/tags/recommend', async (req, res) => {
     .sort((a, b) => b[1] - a[1])
     .map(pair => pair[0])
 
-  res.status(400).json({ recommended_tags: sorted_tag_counts })
+  res.status(200).json({ recommended_tags: sorted_tag_counts })
 })
 
 
+router.get('/gpt/question', async (req, res) => {
+  const { question } = req.body
+
+  const gpt_response = await askQuestion(question)
+
+  if (gpt_response.choices.length == 0) {
+    res.status(400).send({ data: "error, invalid request" })
+  } else {
+    res.status(200).send({ data: gpt_response.choices })
+  }
+})
 
 // ============================= POST =============================
 
