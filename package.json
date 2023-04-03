@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "dotenv -e .env.production -- tsnodemon -x 'ts-node index.ts'",
     "dev:debug": "dotenv -e .env.production -- tsnodemon -x 'ts-node index.ts --trace-deprecation'",
-    "test": "dotenv -e .env.test -- jest",
+    "test": "dotenv -e .env.test -- jest __tests__",
     "start": "dotenv -e .env.production -- ts-node index.ts",
     "migrate:dev:prod": "dotenv -e .env.production -- npx prisma migrate dev",
     "migrate:dev:test": "dotenv -e .env.test -- npx prisma migrate dev",

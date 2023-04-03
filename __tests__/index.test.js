@@ -1,6 +1,6 @@
 import request from "supertest";
-import config from "./config"
-import app from "./app"
+import config from "../config"
+import app from "../app"
 
 const frontend = 'https://www.synapsenote.com';
 // const backend = 'https://api.synapsenote.com';
