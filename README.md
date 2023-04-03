@@ -50,7 +50,6 @@ yarn test
 
 Setup Production Database
 ```bash
-```bash
 yarn migrate:dev:test
 yarn migrate:dev:production
 yarn migrate:deploy:production
