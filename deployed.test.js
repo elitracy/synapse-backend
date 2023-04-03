@@ -6,7 +6,6 @@ const frontend = 'https://www.synapsenote.com';
 // const backend = 'https://api.synapsenote.com';
 
 console.log(`NODE_ENV=${config.NODE_ENV}`);
-console.log(process.env.DATABASE_PASSWORD)
 
 describe('Frontend Status', () => {
 	it('Home page 200 status code', async () => {

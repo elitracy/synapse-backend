@@ -7,13 +7,10 @@
     "dev:debug": "dotenv -e .env.production -- tsnodemon -x 'ts-node index.ts --trace-deprecation'",
     "test": "dotenv -e .env.test -- jest",
     "start": "dotenv -e .env.production -- ts-node index.ts",
-
     "migrate:dev:prod": "dotenv -e .env.production -- npx prisma migrate dev",
     "migrate:dev:test": "dotenv -e .env.test -- npx prisma migrate dev",
-
     "migrate:deploy:prod": "dotenv -e .env.production -- npx prisma migrate deploy",
     "migrate:deploy:test": "dotenv -e .env.test -- npx prisma migrate deploy",
-
     "vercel-build": "prisma generate -- prisma migrate deploy"
   },
   "dependencies": {
@@ -33,6 +30,7 @@
     "babel-jest": "^29.5.0",
     "cors": "^2.8.5",
     "dotenv": "^16.0.3",
+    "dotenv-cli": "^7.1.0",
     "jest": "^29.5.0",
     "newman": "^5.3.2",
     "prisma": "^4.11.0",
