@@ -22,7 +22,7 @@ export DIRECT_URL="postgresql://<USERNAME>:<PASSWORD>@<HOSTING_DB_URL>:5432/post
 export DATABASE_URL="postgres://<USERNAME>:<PASSWORD>@<HOSTING_DB_URL>:6543/postgres?pgbouncer=true&connect_timeout=500"
 ```
 
-_(optional)_ Add Testing Database URLs (PostgreSQL) to environment
+Add Testing Database URLs (PostgreSQL) to environment *(optional)*
 ```bash
 # .env.testing
 export DIRECT_URL="postgresql://<USERNAME>:<PASSWORD>@<DATABASE_URL>:5432/postgres?connect_timeout=500"
