@@ -1,4 +1,4 @@
-import request from "supertest";
+import request from "supertest"
 import config from "../config"
 import app from "../app"
 

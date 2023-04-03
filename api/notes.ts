@@ -1,7 +1,7 @@
 import express from "express"
 import { PrismaClient } from '@prisma/client'
 import keyword_extractor from 'keyword-extractor'
-import askQuestion from "../gptUtils/gptAskQuestion"
+import { askQuestion } from "../utils/gpt"
 
 const prisma = new PrismaClient()
 
