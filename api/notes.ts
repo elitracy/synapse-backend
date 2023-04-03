@@ -1,7 +1,12 @@
 import express from "express"
 import { PrismaClient } from '@prisma/client'
+<<<<<<< HEAD
 import keyword_extractor from 'keyword-extractor'
 
+=======
+import gptAskQuestion from "../gptUtils/gptAskQuestion"
+import askQuestion from "../gptUtils/gptAskQuestion"
+>>>>>>> 8b1752e (added gpt question endpoint)
 const prisma = new PrismaClient()
 
 const router = express.Router()
