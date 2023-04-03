@@ -1,7 +1,12 @@
 import request from "supertest";
+import config from "./config"
+import app from "./app"
 
 const frontend = 'https://www.synapsenote.com';
-const backend = 'https://api.synapsenote.com';
+// const backend = 'https://api.synapsenote.com';
+
+console.log(`NODE_ENV=${config.NODE_ENV}`);
+console.log(process.env.DATABASE_PASSWORD)
 
 describe('Frontend Status', () => {
 	it('Home page 200 status code', async () => {
@@ -14,7 +19,7 @@ describe('Frontend Status', () => {
 
 describe('Backend Status', () => {
 	it('Api home page 200 status code', async () => {
-		const response = await request(backend)
+		const response = await request(app)
 			.get('/');
 
 		expect(response.statusCode).toBe(200);
@@ -24,7 +29,7 @@ describe('Backend Status', () => {
 let userID;
 describe('Backend User Operations', () => {
 	it('Make a user', async () => {
-		const response = await request(backend)
+		const response = await request(app)
 			.post('/api/users')
 			.send({
 			"name": "jest",
@@ -36,7 +41,7 @@ describe('Backend User Operations', () => {
 	});
 	
 	it('Query a user by ID', async () => {
-		const response = await request(backend)
+		const response = await request(app)
 			.get(`/api/users/${userID}`);
 		expect(response._body.name).toBe('jest')
 		expect(response._body.email).toBe('jest@gmail.com')
@@ -44,7 +49,7 @@ describe('Backend User Operations', () => {
 	});
 
 	it('Delete a user by ID', async () => {
-		const response = await request(backend)
+		const response = await request(app)
 			.delete(`/api/users/${userID}`);
 		expect(response.statusCode).toBe(200)
 	});
