@@ -1,7 +1,7 @@
 import express from "express"
 import { PrismaClient } from '@prisma/client'
 import keyword_extractor from 'keyword-extractor'
-import { askQuestion } from "../utils/gpt"
+import { askQuestion, getReferences } from "../utils/gpt"
 
 const prisma = new PrismaClient()
 
@@ -110,6 +110,18 @@ router.get('/gpt/question', async (req, res) => {
   const { question } = req.body
 
   const gpt_response = await askQuestion(question)
+
+  if (gpt_response.choices.length == 0) {
+    res.status(400).send({ data: "error, invalid request" })
+  } else {
+    res.status(200).send({ data: gpt_response.choices })
+  }
+})
+
+router.get('/gpt/getReferences', async (req, res) => {
+  const { content } = req.body
+
+  const gpt_response = await getReferences(content)
 
   if (gpt_response.choices.length == 0) {
     res.status(400).send({ data: "error, invalid request" })

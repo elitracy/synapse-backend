@@ -25,3 +25,13 @@ export async function linkNodes(node1: String, node2: String) {
   );
   return completion.data
 }
+
+export async function getReferences(content: String) {
+  const completion = await openai.createChatCompletion(
+    {
+      model: "gpt-3.5-turbo",
+      messages: [{ role: "user", content: `Please give me 3 references for further research or learning about ${content}. If none exist say 'no valid references' otherwise return only the links in a comma seperated list.` }]
+    },
+  );
+  return completion.data
+}
