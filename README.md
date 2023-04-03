@@ -41,7 +41,7 @@ Setup Prisma
 npx prisma generate
 ```
 
-Setup Testing Database (optional)
+Setup Testing Database *(optional)*
 ```bash
 yarn migrate:dev:test
 yarn migrate:deploy:test
