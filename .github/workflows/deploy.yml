@@ -21,8 +21,9 @@ jobs:
 
       - name: Install dependencies
         run: yarn install
+        
+      - name: Add Jest
+        run: yarn add global jest
 
       - name: Run unit tests
-        uses: stefanoeb/jest-action@1.0.3
-        with:
-          jestArgs: __tests__
+        run: yarn test:ci
