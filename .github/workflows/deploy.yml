@@ -25,4 +25,4 @@ jobs:
         run: yarn install
 
       - name: Run unit tests
-        run: jest __tests__
+        run: node_modules/.bin/jest __tests__
