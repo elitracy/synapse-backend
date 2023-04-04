@@ -5,14 +5,17 @@
   "scripts": {
     "dev": "dotenv -e .env.production -- tsnodemon -x 'ts-node index.ts'",
     "dev:debug": "dotenv -e .env.production -- tsnodemon -x 'ts-node index.ts --trace-deprecation'",
+
     "test": "dotenv -e .env.test -- jest",
     "test:ci": "jest",
-    "start": "dotenv -e .env.production -- ts-node index.ts",
+
     "migrate:dev:prod": "dotenv -e .env.production -- npx prisma migrate dev",
     "migrate:dev:test": "dotenv -e .env.test -- npx prisma migrate dev",
     "migrate:deploy:prod": "dotenv -e .env.production -- npx prisma migrate deploy",
     "migrate:deploy:test": "dotenv -e .env.test -- npx prisma migrate deploy",
-    "vercel-build": "prisma generate -- prisma migrate deploy"
+
+    "vercel-build": "prisma generate -- prisma migrate deploy",
+    "start": "dotenv -e .env.production -- ts-node index.ts"
   },
   "dependencies": {
     "@prisma/client": "^4.11.0",
