@@ -219,7 +219,6 @@ router.put('/tags/:id', async (req, res) => {
   }).then((note) => {
     res.status(200).json(note)
   }).catch((err) => {
-    console.log(err)
     res.status(400).json(err)
   })
 })

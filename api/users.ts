@@ -36,7 +36,6 @@ router.get('/:userId/notes', async (req, res) => {
     .findMany({
       where: { userId },
     }).then((note) => {
-      //console.log(note)
       res.status(200).json(note)
     }).catch((err) => {
       res.status(400).json(err)
@@ -64,6 +63,7 @@ router.get('/:id/adj_list', async (req, res) => {
 
 router.post('/', async (req, res) => {
   const { name, email, password } = req.body
+
   prisma.user.create({
     data: {
       name, email, password
