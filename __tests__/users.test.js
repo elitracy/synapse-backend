@@ -1,7 +1,7 @@
 import request from 'supertest'
 import app from '../app'
 
-let userID: String
+let userID 
 describe('Backend User Operations', () => {
   it('Make a user', async () => {
     const response = await request(app)
@@ -31,7 +31,7 @@ describe('Backend User Operations', () => {
 })
 
 
-let noteID: String
+let noteID 
 describe('Backend User-Note Operations', () => {
   it('Make a user', async () => {
     const response = await request(app)

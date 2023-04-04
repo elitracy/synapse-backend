@@ -1,7 +1,7 @@
 import request from "supertest"
 import app from "../app"
 
-let noteID: String
+let noteID
 describe('Backend Note Operations', () => {
   it('Make a note', async () => {
     const response = await request(app)
@@ -76,7 +76,7 @@ describe("Backend Note-Tag Operations", () => {
     const response = await request(app)
       .get(`/api/notes/${noteID}/tags`)
       .expect(200)
-    expect(response.body.tags.map((t: { id: String, name: String }) => t.name)).toStrictEqual(tags)
+    expect(response.body.tags.map(t => t.name)).toStrictEqual(tags)
     expect(response.body.tags.length).toBe(2)
   })
 
