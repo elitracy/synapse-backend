@@ -1,7 +1,7 @@
 import request from 'supertest'
 import app from 'app'
 
-let userID: string 
+let userID: string
 describe('Backend User Operations', () => {
   it('Make a user', async () => {
     const response = await request(app)
@@ -9,7 +9,7 @@ describe('Backend User Operations', () => {
       .send({
         'name': 'jest',
         'email': 'jest@gmail.com',
-        'password': 'jestPass'
+        'password': 'jestPass',
       }).expect(200)
     userID = response.body.id
   })
@@ -22,6 +22,39 @@ describe('Backend User Operations', () => {
     expect(response.body.email).toBe('jest@gmail.com')
   })
 
+  it('Query user by email', async () => {
+    const response = await request(app)
+      .post(`/api/users/email`)
+      .send({ email: 'jest@gmail.com' })
+      .expect(200)
+    expect(response.body.name).toBe('jest')
+    expect(response.body.email).toBe('jest@gmail.com')
+  })
+
+  it('Change a users password', async () => {
+    const response = await request(app)
+      .put(`/api/users/${userID}/password`)
+      .send({ password: 'newpassword' })
+      .expect(200)
+    expect(response.body.password).toBe('newpassword')
+  })
+
+  it('Change a users email', async () => {
+    const response = await request(app)
+      .put(`/api/users/${userID}/email`)
+      .send({ email: 'new@email.com' })
+      .expect(200)
+    expect(response.body.email).toBe('new@email.com')
+  })
+
+  it('Change a users name', async () => {
+    const response = await request(app)
+      .put(`/api/users/${userID}/name`)
+      .send({ name: 'New Name' })
+      .expect(200)
+    expect(response.body.name).toBe('New Name')
+  })
+
   it('Delete a user by ID', async () => {
     await request(app)
       .delete(`/api/users/${userID}`)
@@ -31,7 +64,7 @@ describe('Backend User Operations', () => {
 })
 
 
-let noteID: string 
+let noteID: string
 describe('Backend User-Note Operations', () => {
   it('Make a user', async () => {
     const response = await request(app)
@@ -92,7 +125,7 @@ describe('Backend User-Note Operations', () => {
       .expect(200)
     expect(response.body.title).toBe("Updated Title")
   })
-  
+
   it('User can edit the privacy of their note', async () => {
     const response = await request(app)
       .put(`/api/notes/isPublic/${noteID}`)
@@ -120,5 +153,12 @@ describe('Backend User-Note Operations', () => {
     const response = await request(app)
       .delete(`/api/users/${userID}`)
     expect(response.statusCode).toBe(200)
+  })
+
+  it('User should no longer exist', async () => {
+    const response = await request(app)
+      .get(`/api/users/${userID}`)
+      .expect(200)
+    expect(response.body).toBeNull()
   })
 })
