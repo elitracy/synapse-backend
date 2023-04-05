@@ -1,0 +1,11 @@
+{
+  "rootDir": "./",
+  "preset": "ts-jest",
+  "testEnvironment": "node",
+  "modulePaths": [
+    "./"
+  ],
+  "modulePathIgnorePatterns": [
+    "build"
+  ]
+}

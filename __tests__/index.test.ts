@@ -1,5 +1,5 @@
 import request from "supertest"
-import app from "../app"
+import app from "app"
 
 const frontend = 'https://www.synapsenote.com'
 // const backend = 'https://api.synapsenote.com'
