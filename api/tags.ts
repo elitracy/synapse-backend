@@ -33,4 +33,16 @@ router.get('/gpt/linkNodes', async (req, res) => {
 
 // ============================= DELETE =============================
 
+router.delete('/:id', async (req, res) => {
+  const id = req.params
+
+  prisma.tag.delete({
+    where: id
+  }).then((tag) => {
+    res.status(200).json(tag)
+  }).catch((err) => {
+    res.status(400).json(err)
+  })
+})
+
 export default router
