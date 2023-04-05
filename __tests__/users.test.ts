@@ -73,6 +73,36 @@ describe('Backend User-Note Operations', () => {
     expect(response.body.length).toBe(1)
   })
 
+  it('User can edit the content of their note', async () => {
+    const response = await request(app)
+      .put(`/api/notes/content/${noteID}`)
+      .send({
+        content: "I am updated note content"
+      })
+      .expect(200)
+    expect(response.body.content).toBe("I am updated note content")
+  })
+
+  it('User can edit the title of their note', async () => {
+    const response = await request(app)
+      .put(`/api/notes/title/${noteID}`)
+      .send({
+        title: "Updated Title"
+      })
+      .expect(200)
+    expect(response.body.title).toBe("Updated Title")
+  })
+  
+  it('User can edit the privacy of their note', async () => {
+    const response = await request(app)
+      .put(`/api/notes/isPublic/${noteID}`)
+      .send({
+        isPublic: true
+      })
+      .expect(200)
+    expect(response.body.isPublic).toBe(true)
+  })
+
   it('Delete a note by ID', async () => {
     await request(app)
       .delete(`/api/notes/${noteID}`)
