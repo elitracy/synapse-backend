@@ -106,7 +106,7 @@ router.get('/tags/recommend', async (req, res) => {
 })
 
 
-router.get('/gpt/question', async (req, res) => {
+router.post('/gpt/question', async (req, res) => {
   const { question } = req.body
 
   const gpt_response = await askQuestion(question)
@@ -118,7 +118,7 @@ router.get('/gpt/question', async (req, res) => {
   }
 })
 
-router.get('/gpt/getReferences', async (req, res) => {
+router.post('/gpt/getReferences', async (req, res) => {
   const { content } = req.body
 
   const gpt_response = await getReferences(content)
