@@ -7,6 +7,7 @@ const router = express.Router()
 
 // ============================= GET =============================
 
+// get all tags
 router.get('/', async (_, res) => {
   prisma.tag.findMany().then((tag) => {
     res.status(200).json(tag)
@@ -15,6 +16,7 @@ router.get('/', async (_, res) => {
   })
 })
 
+// get GPT3.5 response for how two tags are related
 router.get('/gpt/linkNodes', async (req, res) => {
   const { node1, node2 } = req.body
 
@@ -33,6 +35,7 @@ router.get('/gpt/linkNodes', async (req, res) => {
 
 // ============================= DELETE =============================
 
+// delete a tag
 router.delete('/:id', async (req, res) => {
   const id = req.params
 
