@@ -9,15 +9,16 @@ const router = express.Router()
 
 // ============================= GET =============================
 
-router.get('/', async (_, res) => {
-  prisma.note.findMany().then((note) => {
+// returns all notes
+router.get('/', async (_, res) => { 
+ prisma.note.findMany().then((note) => {
     res.status(200).json(note)
   }).catch((err) => {
     res.status(400).json(err)
   })
 })
 
-
+// returns a note by its specific id
 router.get('/:id', async (req, res) => {
   const { id } = req.params
 
@@ -55,8 +56,6 @@ router.get('/tag/:id/count', async (req, res) => {
     _count: {
       id: true
     }
-
-
   }).then((note) => {
     res.status(200).json(note)
   }).catch((err) => {
@@ -79,6 +78,7 @@ router.get('/:id/tags', async (req, res) => {
     })
 })
 
+// gets recommended tags based on the content of the note
 router.get('/tags/recommend', async (req, res) => {
 
   const { content }: { content: string } = req.body
@@ -106,6 +106,7 @@ router.get('/tags/recommend', async (req, res) => {
 })
 
 
+// gets a response to a question from GPT3.5
 router.post('/gpt/question', async (req, res) => {
   const { question } = req.body
 
@@ -118,6 +119,7 @@ router.post('/gpt/question', async (req, res) => {
   }
 })
 
+// gets references from GPT3.5
 router.post('/gpt/getReferences', async (req, res) => {
   const { content } = req.body
 
@@ -132,6 +134,7 @@ router.post('/gpt/getReferences', async (req, res) => {
 
 // ============================= POST =============================
 
+// creates a note and returns it
 router.post('/', async (req, res) => {
   const { content, userId, title, isPublic } = req.body
   prisma.note.create({
@@ -147,6 +150,7 @@ router.post('/', async (req, res) => {
 
 // ============================= PUT =============================
 
+// updates the body content of a notes
 router.put('/content/:id', async (req, res) => {
   const { id } = req.params
   let { content } = req.body
@@ -161,6 +165,7 @@ router.put('/content/:id', async (req, res) => {
   })
 })
 
+// updates the title of a note
 router.put('/title/:id', async (req, res) => {
   const { id } = req.params
   let { title } = req.body
@@ -175,6 +180,7 @@ router.put('/title/:id', async (req, res) => {
   })
 })
 
+// updates the visibility of a note 
 router.put('/isPublic/:id', async (req, res) => {
   const { id } = req.params
   let { isPublic } = req.body
@@ -189,6 +195,7 @@ router.put('/isPublic/:id', async (req, res) => {
   })
 })
 
+// updates the tags associated linked to a note 
 router.put('/tags/:id', async (req, res) => {
   const { id } = req.params
   let { tags }: { tags: string[] } = req.body
@@ -226,6 +233,7 @@ router.put('/tags/:id', async (req, res) => {
 
 // ============================= DELETE =============================
 
+// deletes a note by its ID
 router.delete('/:id', async (req, res) => {
   const { id } = req.params
   prisma.note.delete({
