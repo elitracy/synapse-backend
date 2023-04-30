@@ -14,7 +14,7 @@ describe('Frontend Status', () => {
 })
 
 describe('Backend Status', () => {
-	it('Api home page 200 status code', async () => {
+	it('API home page 200 status code', async () => {
 		const response = await request(app)
 			.get('/')
 
