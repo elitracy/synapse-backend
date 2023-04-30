@@ -6,6 +6,7 @@ const router = express.Router()
 
 // ============================= GET =============================
 
+// get all users
 router.get('/', async (_, res) => {
   prisma.user.findMany().then((user) => {
     res.status(200).json(user)
@@ -15,6 +16,7 @@ router.get('/', async (_, res) => {
 })
 
 
+// get user by id
 router.get('/:id', async (req, res) => {
   const { id } = req.params
 
@@ -42,6 +44,7 @@ router.get('/:userId/notes', async (req, res) => {
     })
 })
 
+// get users tag adjacency list
 router.get('/:id/adj_list', async (req, res) => {
   const { id } = req.params
 
@@ -61,6 +64,7 @@ router.get('/:id/adj_list', async (req, res) => {
 
 // ============================= POST =============================
 
+// create a user
 router.post('/', async (req, res) => {
   const { name, email, password } = req.body
 
@@ -75,6 +79,7 @@ router.post('/', async (req, res) => {
   })
 })
 
+// get a user by email (POST request because body is needed with axios by request of frontend team)
 router.post('/email', async (req, res) => {
   const { email } = req.body
 
@@ -88,6 +93,7 @@ router.post('/email', async (req, res) => {
     })
 })
 
+// get a user's adjacency list (POST request because body is needed with axios by request of frontend team)
 router.post('/:id/adj_list', async (req, res) => {
   const { id } = req.params
   const { adj_list } = req.body
@@ -107,6 +113,7 @@ router.post('/:id/adj_list', async (req, res) => {
 
 // ============================= PUT =============================
 
+// update a user's password
 router.put('/:id/password', async (req, res) => {
   const { id } = req.params
   const { password } = req.body
@@ -121,6 +128,7 @@ router.put('/:id/password', async (req, res) => {
   })
 })
 
+// update a user's email
 router.put('/:id/email', async (req, res) => {
   const { id } = req.params
   const { email } = req.body
@@ -135,6 +143,7 @@ router.put('/:id/email', async (req, res) => {
   })
 })
 
+// update a user's name
 router.put('/:id/name', async (req, res) => {
   const { id } = req.params
   const { name } = req.body
@@ -151,6 +160,7 @@ router.put('/:id/name', async (req, res) => {
 
 // ============================= DELETE =============================
 
+// delete a user by id
 router.delete('/:id', async (req, res) => {
   const { id } = req.params
   prisma.user.delete({
